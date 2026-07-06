@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>ACVN Summer Camp 2026 - House Points</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#05001f;
+
+--red:#ff5b5b;
+--blue:#4aa8ff;
+--green:#8cff5c;
+--gold:#ffc94d;
+
+--goldText:#ffd27f;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:Poppins,sans-serif;
+
+background:
+radial-gradient(circle at top,#140043,#040018 70%);
+
+color:white;
+
+min-height:100vh;
+
+overflow-x:hidden;
+}
+
+/* STARS */
+
+body::before{
+
+content:'';
+
+position:fixed;
+
+inset:0;
+
+background-image:
+
+radial-gradient(white 1px,transparent 1px),
+
+radial-gradient(#ffd27f 1px,transparent 1px);
+
+background-size:120px 120px,180px 180px;
+
+opacity:.25;
+
+pointer-events:none;
+
+animation:stars 40s linear infinite;
+}
+
+@keyframes stars{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(200px);
+}
+
+}
+
+/* HEADER */
+
+.header{
+
+text-align:center;
+
+padding:30px 20px;
+}
+
+.logo{
+
+width:250px;
+
+max-width:90%;
+}
+
+.title{
+
+font-family:Cinzel,serif;
+
+font-size:3rem;
+
+font-weight:700;
+
+color:var(--goldText);
+
+text-shadow:
+0 0 15px rgba(255,210,127,.6);
+
+margin-top:10px;
+}
+
+.subtitle{
+
+margin-top:10px;
+
+letter-spacing:4px;
+
+color:#a9a3c7;
+
+font-size:1rem;
+}
+
+.divider{
+
+width:300px;
+
+height:2px;
+
+background:#cba94f;
+
+margin:20px auto;
+}
+
+/* BOARD */
+
+.board{
+
+max-width:1400px;
+
+margin:auto;
+
+padding:30px;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+}
+
+/* CARD */
+
+.card{
+
+background:rgba(5,5,35,.75);
+
+backdrop-filter:blur(8px);
+
+border-radius:24px;
+
+padding:25px;
+
+text-align:center;
+
+transition:.4s;
+}
+
+.card:hover{
+
+transform:translateY(-10px);
+}
+
+.house-name{
+
+font-family:Cinzel,serif;
+
+font-size:1.8rem;
+
+font-weight:700;
+
+margin-bottom:20px;
+}
+
+/* MASCOT */
+
+.mascot{
+
+height:220px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+}
+
+.mascot img{
+
+width:180px;
+
+max-width:100%;
+
+transition:.4s;
+}
+
+.card:hover .mascot img{
+
+transform:scale(1.08);
+}
+
+/* SCORE */
+
+.score{
+
+font-size:4rem;
+
+font-weight:700;
+}
+
+.point-label{
+
+letter-spacing:5px;
+
+color:#b8b8d6;
+}
+
+.progress{
+
+height:12px;
+
+background:rgba(255,255,255,.1);
+
+margin-top:20px;
+
+border-radius:20px;
+
+overflow:hidden;
+}
+
+.progress-bar{
+
+height:100%;
+
+width:0;
+
+transition:1s;
+}
+
+/* COLORS */
+
+.pegasus{
+
+border-top:3px solid var(--green);
+}
+
+.pegasus .house-name{
+color:#7CFC00;
+}
+.pegasus .progress-bar{
+
+background:var(--green);
+}
+
+.dragon{
+
+border-top:3px solid var(--blue);
+}
+
+.dragon .house-name{
+
+color:var(--blue);
+}
+
+.dragon .progress-bar{
+
+background:var(--blue);
+}
+
+.phoenix{
+
+border-top:3px solid var(--red);
+}
+
+.phoenix .house-name{
+
+color:var(--red);
+}
+
+.phoenix .progress-bar{
+
+background:var(--red);
+}
+
+.griffin{
+
+border-top:3px solid var(--gold);
+}
+
+.griffin .house-name{
+
+color:var(--gold);
+}
+
+.griffin .progress-bar{
+
+background:var(--gold);
+}
+
+/* LEADER */
+
+.rank1{
+
+border:2px solid gold;
+
+box-shadow:
+
+0 0 15px gold,
+
+0 0 40px rgba(255,215,0,.25);
+
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.02);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.footer{
+
+text-align:center;
+
+padding:40px;
+
+color:#aaa;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<img src="images/logo-acvn.png" class="logo">
+
+<div class="title">
+✨ ACVN 2026 - INNOVATORS CAMP ✨
+</div>
+
+<div class="subtitle">
+BẢNG ĐIỂM CÁC NHÀ (TRỰC TIẾP)
+</div>
+
+<div class="divider"></div>
+
+</div>
+
+<div class="board" id="board"></div>
+
+<div class="footer">
+Ardingly College Vietnam Summer Camp 2026 - Innovators Camp
+</div>
+
+<script>
+
+/* DÁN APPS SCRIPT URL */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwxihNATe_4U849SLdf_1_bzy3LHOiGzcCzOhGSce8H-NklQKPxaBC3VDbk2DToZ4tr/exec";
+
+async function loadData(){
+
+const response =
+await fetch(API_URL);
+
+const houses =
+await response.json();
+
+houses.sort(
+(a,b)=>b.points-a.points
+);
+
+const maxPoint =
+Math.max(...houses.map(h=>h.points));
+
+let html='';
+
+houses.forEach((house,index)=>{
+
+const cls =
+house.house.toLowerCase();
+
+const percent =
+(maxPoint===0)
+?0
+:(house.points/maxPoint)*100;
+
+html+=`
+
+<div class="card ${cls}
+${index===0?'rank1':''}">
+
+<div class="house-name">
+${house.house}
+</div>
+
+<div class="mascot">
+<img src="images/${cls}.png">
+</div>
+
+<div class="score">
+${house.points}
+</div>
+
+<div class="point-label">
+ĐIỂM
+</div>
+
+<div class="progress">
+
+<div class="progress-bar"
+style="width:${percent}%">
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("board")
+.innerHTML=html;
+
+}
+
+loadData();
+
+setInterval(
+loadData,
+10000
+);
+
+</script>
+
+</body>
+</html>
